@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
@@ -54,6 +55,20 @@
       .contact-btn:hover {
         background-color: #0056b3;
       }
+      .lang-section {
+        display: none;
+      }
+      .lang-section.active {
+        display: block;
+      }
+
+      .lang-switch {
+        margin-top: 20px;
+        font-size: 14px;
+      }
+      .lang-switch a {
+        margin-right: 10px;
+      }
     </style>
   </head>
   <body>
@@ -65,28 +80,81 @@
         />
       </header>
 
-      <h1>Polityka prywatności i regulamin</h1>
+      <div id="lang-pl" class="lang-section active">
+        <h1>Polityka prywatności i regulamin</h1>
 
-      <p>
-        Polityka prywatności:
-        <a
-          href="https://heyokay-api.herokuapp.com/info/polityka_prywatnosci"
-          target="_blank"
-          >link</a
-        >
-      </p>
-      <p>
-        Regulamin:
-        <a
-          href="https://heyokay-api.herokuapp.com/info/regulamin"
-          target="_blank"
-          >link</a
-        >
-      </p>
+        <p>
+          Polityka prywatności:
+          <a
+            href="https://heyokay-api.herokuapp.com/info/polityka_prywatnosci"
+            target="_blank"
+            >link</a
+          >
+        </p>
+        <p>
+          Regulamin:
+          <a
+            href="https://heyokay-api.herokuapp.com/info/regulamin"
+            target="_blank"
+            >link</a
+          >
+        </p>
 
-      <a href="mailto:kontakt@heyokay.net" class="contact-btn"
-        >Skontaktuj się z nami</a
-      >
+        <a href="mailto:kontakt@heyokay.net" class="contact-btn"
+          >Skontaktuj się z nami</a
+        >
+      </div>
+
+      <!-- Wersja angielska -->
+      <div id="lang-en" class="lang-section">
+        <h1>Privacy Policy and Terms of Service</h1>
+
+        <p>
+          Privacy Policy:
+          <a
+            href="https://heyokay-api.herokuapp.com/info/polityka_prywatnosci"
+            target="_blank"
+            >link</a
+          >
+        </p>
+        <p>
+          Terms of Service:
+          <a
+            href="https://heyokay-api.herokuapp.com/info/regulamin"
+            target="_blank"
+            >link</a
+          >
+        </p>
+
+        <a href="mailto:kontakt@heyokay.net" class="contact-btn">Contact us</a>
+      </div>
+
+      <div class="lang-switch">
+        <strong>Language / Język:</strong>
+        <a href="/">Polski</a>
+        <a href="/english">English</a>
+      </div>
     </div>
+
+    <script>
+      (function () {
+        var path = window.location.pathname.toLowerCase();
+        var plSection = document.getElementById("lang-pl");
+        var enSection = document.getElementById("lang-en");
+        var htmlTag = document.documentElement;
+
+        if (path.includes("/english")) {
+          if (plSection) plSection.classList.remove("active");
+          if (enSection) enSection.classList.add("active");
+          htmlTag.setAttribute("lang", "en");
+          document.title = "Privacy Policy and Terms of Service";
+        } else {
+          if (enSection) enSection.classList.remove("active");
+          if (plSection) plSection.classList.add("active");
+          htmlTag.setAttribute("lang", "pl");
+          document.title = "Polityka prywatności i regulamin";
+        }
+      })();
+    </script>
   </body>
 </html>
